@@ -7,18 +7,28 @@ const start = document.getElementById("start");
 
 let rollCount = 0;
 let scoreCount = 0;
+let point = 0;
 
 roll.addEventListener("click", () => {
     start.style.display = "none";
+    rollCount++;
     const dice1Value = Math.floor(Math.random() * 6) + 1;
     const dice2Value = Math.floor(Math.random() * 6) + 1;
     dice1.src = `no${dice1Value}.png`;
-    dice1.value = dice1Value;
     dice2.src = `no${dice2Value}.png`;
-    dice2.value = dice2Value;
     scoreCount = dice1Value + dice2Value;
-    rollCount++;
     score.textContent = `Scores: ${scoreCount}`;
+
+    if (scoreCount === 7 && rollCount === 1) {
+        start.style.display = "block";
+        start.textContent = "You won!";
+    } else if ((scoreCount === 2 || scoreCount === 3 || scoreCount === 12) && rollCount === 1) {
+        start.style.display = "block";
+        start.textContent = "You lost!";
+        
+    } else if (rollCount != 7 && rollCount === 1) {
+
+    }
 });
 
 reset.addEventListener("click", () => {
